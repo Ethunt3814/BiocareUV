@@ -11,9 +11,14 @@
             color: grey !important;
          }
          .form-section{
-             padding: 50px;
-             width: 25%;
-             float: left;
+             padding: 50px !important;
+             width: 25% !important;
+             float: left !important;
+         }
+         .list-section{
+             padding: 100px !important;
+             float: right !important;
+             width: 30% !important;
          }
      </style>
 </head>
