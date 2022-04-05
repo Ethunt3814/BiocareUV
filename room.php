@@ -3,6 +3,9 @@
     class Room{
 
         //basic room dimentions in metric (meters)
+        public $widthF;
+        public $lengthF;
+        public $heightF;
         public $widthM;
         public $lengthM;
         public $heightM;
@@ -12,6 +15,7 @@
         public $heightCM;
         public $wpDist;
         public $area;
+        public $areaF;
 
         //variables
         public $peakIntensity20cm = 3.44;
@@ -39,8 +43,9 @@
         public $intesityFOverlap;
         public $tToDoseF;
 
-        public $maxLumiSpacing;
-        public $maxAreaCoverage;
+        public $maxLumiSpacingCM;
+        public $maxAreaCoverageCM;
+        public $maxLumiSpacingF;
         public $maxAreaSide;
         public $lumiPerArea;
         public $lumiPerW;
@@ -62,20 +67,26 @@
         {
 
             //get room dimentions
-            $this->widthM = $width;
-            $this->heightM = $height;
-            $this->lengthM = $length;
+            $this->widthF = $width;
+            $this->heightF = $height;
+            $this->lengthF = $length;
             $this->desks = $desks;
             
+            //convert to metric
+            $this->widthCM = $width*30.48;
+            $this->heightCM = $height*30.48;
+            $this->lengthCM = $length*30.48;
             
             //find germicidal intensity at 20 cm
             $this->germicidalIntensity20cm = pow(1/(20/4),2)*$this->totalGermicidalIntensity4cm;
 
             //convert meters to centimeters
-            $this->widthCM = $this->widthM*100;
-            $this->lengthCM = $this->lengthM*100;
-            $this->heightCM = $this->heightM*100;
+            $this->widthM = $this->widthCM/100;
+            $this->lengthM = $this->lengthCM/100;
+            $this->heightM = $this->heightCM/100;
 
+            //area calculations
+            $this->areaF= $width*$length;
             $this->area = $this->widthCM*$this->heightCM;
             
             //find workplane distance
@@ -115,13 +126,15 @@
 
             //Luminaire Spacing 
             //needs fixing
-            $this->maxLumiSpacing = $this->wpDist*2+$this->WORKPLANEHEIGHT;
-            $this->maxAreaCoverage =pow((($this->heightCM/2)*2),2);
-            $this->maxAreaSide = sqrt($this->maxAreaCoverage);
+            $this->maxLumiSpacingCM = $this->wpDist*2+$this->WORKPLANEHEIGHT;
+            $this->maxAreaCoverageCM = ($this->wpDist+$this->WORKPLANEHEIGHT/2)*2;
+            $this->maxAreaCoverageCM = pow($this->maxAreaCoverageCM,2);
+            $this->maxAreaCoverageF = $this->maxAreaCoverageCM/pow(30.48,2);
+            $this->maxAreaSide = sqrt($this->maxAreaCoverageF);
 
-            $this->lumiPerArea = $this->area/$this->maxAreaCoverage;
-            $this->lumiPerW = $this->widthCM/$this->maxAreaSide;
-            $this->lumiPerL = $this->lengthCM/$this->maxAreaSide;
+            $this->lumiPerArea = $this->areaF/$this->maxAreaCoverageF;
+            $this->lumiPerW = $this->widthF/$this->maxAreaSide;
+            $this->lumiPerL = $this->lengthF/$this->maxAreaSide;
             $this->optimalLumiPerA= round($this->lumiPerArea);
             $this->optimalLumiPerL= round($this->lumiPerL);
             $this->optimalLumiPerW= round($this->lumiPerW);

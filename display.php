@@ -63,6 +63,10 @@
                 <th>Workplane Height</th>
                 <th><?php echo $_SESSION["room"]->WORKPLANEHEIGHT ?></th>
             </tr>
+            <tr>
+                <th>Workplane Distance</th>
+                <th><?php echo $_SESSION["room"]->wpDist?></th>
+            </tr>
         </table>
         </br>
         <h3>Measured Values</h3>
@@ -170,12 +174,16 @@
         <table>
         </tr>
             <tr>
+                <th>Room square feet</th>
+                <th><?php echo $_SESSION["room"]->areaF?></th>
+            </tr>
+            <tr>
                 <th>Optimal max luminaire spacing</th>
-                <th><?php echo $_SESSION["room"]->maxLumiSpacing?></th>
+                <th><?php echo $_SESSION["room"]->maxLumiSpacingCM?></th>
             </tr>
             <tr>
                 <th>Optimal max area coverage</th>
-                <th><?php echo $_SESSION["room"]->maxAreaCoverage?></th>
+                <th><?php echo $_SESSION["room"]->maxAreaCoverageCM?></th>
             </tr>
             <tr>
                 <th>Max area side</th>
