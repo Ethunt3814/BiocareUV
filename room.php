@@ -150,7 +150,7 @@
 
     if(isset($_POST["submit"])){
         $_SESSION["room"] = new Room(floatval($_POST["width"]),floatval($_POST["height"]),floatval($_POST["length"]),floatval($_POST["desks"]));
-        
+        array_push($_SESSION["rooms"],$_SESSION["room"]);
     }
 
 ?>
