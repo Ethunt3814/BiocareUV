@@ -1,3 +1,4 @@
+
 <head>
     <title></title>
         
@@ -25,7 +26,9 @@
     <body class="grey lighten-4">
         <nav class="white z-depth-0">
             <div class="container">
-                <a href="menu.php" class="brand-logo brand-text">Biocare UV</a>
-                    <ul id="nav-moblie" class="right"></ul>
+                <a href="menu.php" class="brand-logo brand-text">
+                    <img src="templates/BiocareUVlogoFC-1024x291.png" height="60px">
+                </a>
+                <ul id="nav-moblie" class="right"></ul>
             </div>
         </nav>
